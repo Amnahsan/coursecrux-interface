@@ -11,11 +11,11 @@ import {
 import {
   LayoutDashboard,
   BookOpen,
-  Calendar,
-  GraduationCap,
-  Settings,
+  ClipboardList,
+  LineChart,
+  User,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const menuItems = [
   {
@@ -29,24 +29,25 @@ const menuItems = [
     path: "/courses",
   },
   {
-    title: "Calendar",
-    icon: Calendar,
-    path: "/calendar",
+    title: "Assignments",
+    icon: ClipboardList,
+    path: "/assignments",
   },
   {
-    title: "Grades",
-    icon: GraduationCap,
-    path: "/grades",
+    title: "Progress",
+    icon: LineChart,
+    path: "/progress",
   },
   {
-    title: "Settings",
-    icon: Settings,
-    path: "/settings",
+    title: "Profile",
+    icon: User,
+    path: "/profile",
   },
 ];
 
 export function DashboardSidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <Sidebar>
@@ -57,7 +58,10 @@ export function DashboardSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton onClick={() => navigate(item.path)}>
+                  <SidebarMenuButton 
+                    onClick={() => navigate(item.path)}
+                    className={location.pathname === item.path ? "bg-accent" : ""}
+                  >
                     <item.icon className="h-4 w-4" />
                     <span>{item.title}</span>
                   </SidebarMenuButton>
